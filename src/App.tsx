@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { SyntheticEvent, useState } from "react";
+import "./App.css";
+import Navbar from "./Components/Navbar/Navbar";
+import { Outlet } from "react-router";
+import { darkTheme } from "./Themes/Themes";
+import { ThemeProvider } from "styled-components";
+import AppStyled from "./AppStyled";
 
-function App() {
+interface AppProps {}
+
+const App: React.FC<AppProps> = (props: AppProps): JSX.Element => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppStyled>
+      <ThemeProvider theme={darkTheme}>
+        <Navbar />
+        <Outlet />
+      </ThemeProvider>
+    </AppStyled>
   );
-}
+};
 
 export default App;
