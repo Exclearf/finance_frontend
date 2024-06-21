@@ -3,6 +3,7 @@ import App from "../App";
 import HomePage from "../Pages/HomePage/HomePage";
 import SearchPage from "../Pages/SearchPage/SearchPage";
 import CompanyPage from "../Pages/CompanyPage/CompanyPage";
+import DesignPage from "../Pages/DesignPage/DesignPage";
 
 export const router = createBrowserRouter([
   {
@@ -12,6 +13,7 @@ export const router = createBrowserRouter([
       { path: "", element: <HomePage /> },
       { path: "search", element: <SearchPage /> },
       { path: "company/:symbol", element: <CompanyPage /> },
+      { path: "design-guide", element: <DesignPage /> },
     ],
   },
 ]);

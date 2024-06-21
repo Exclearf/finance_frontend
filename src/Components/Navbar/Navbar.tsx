@@ -8,6 +8,7 @@ const possiblePaths: any = {
   Search: "Search",
   "": "Home Page",
   company: "Company",
+  'design-guide': "Design Page"
 };
 
 type NavbarProps = {};

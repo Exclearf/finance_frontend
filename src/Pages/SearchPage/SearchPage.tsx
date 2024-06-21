@@ -26,12 +26,26 @@ const SearchPage: React.FC<SearchPageProps> = (
 
     const result = await searchCompanies(search);
 
+    //! ToDo: refactor
     if (typeof result === "string") {
       setServerError(result);
       //@ts-ignore
     } else if (Array.isArray(result?.data.result)) {
-      //@ts-ignore
-      setSearchResult(result?.data.result);
+      const groupedStocks = Object.groupBy(
+        //@ts-ignore
+        result?.data.result,
+        //@ts-ignore
+        (item) => item.displaySymbol.split(".")[0]
+      );
+      if (Object.values(groupedStocks).length > 0) {
+        const parsedResults = Object.values(groupedStocks).map(
+          //@ts-ignore
+          (item: CompanySearch[]) => item[0]
+        );
+        setSearchResult(parsedResults);
+      } else {
+        setServerError("We could not find such a stock...");
+      }
     }
     console.log(searchResult);
   };
@@ -45,7 +59,7 @@ const SearchPage: React.FC<SearchPageProps> = (
     e.target.blur();
   };
 
-  const handleDeleteFromPortfolio = (e: any,  value: string) => {
+  const handleDeleteFromPortfolio = (e: any, value: string) => {
     e.preventDefault();
     setPortfolioValues((portfolioValues) =>
       portfolioValues.filter((item) => item !== value)
@@ -62,7 +76,7 @@ const SearchPage: React.FC<SearchPageProps> = (
         onSearchClick={handleSearchClick}
       />
       <AddToPortfolioContext.Provider value={handleAddToPortfolio}>
-        <CardList searchResults={searchResult.filter(searchResultItem => !searchResultItem.displaySymbol.includes('.'))} />
+        <CardList searchResults={searchResult} />
         {serverError && <h1>Unable to connect to the API</h1>}
       </AddToPortfolioContext.Provider>
       <DeleteFromPortfolioContext.Provider value={handleDeleteFromPortfolio}>
