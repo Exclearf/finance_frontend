@@ -9,8 +9,8 @@ const PortfolioListStyled = styled.div`
     ${(props) => props.theme.leftGradientValue},
     ${(props) => props.theme.rightGradientValue}
   );
-  box-shadow: 20px 20px 60px ${(props) => props.theme.bottomShadow},
-    -20px -20px 60px ${(props) => props.theme.topShadow};
+  box-shadow: 7px 7px 10px ${(props) => props.theme.bottomShadow},
+    -7px -7px 10px ${(props) => props.theme.topShadow};
 
   margin: 2% 0px 2% 0px;
   padding: 10px 30px 20px 30px;

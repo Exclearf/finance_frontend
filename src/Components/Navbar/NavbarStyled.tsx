@@ -35,7 +35,7 @@ const NavbarStyled = styled.div`
 
   .accountSection {
     grid-area: accountSection;
-
+    font-size: 1.25rem;
     width: 100%;
 
     padding: 0px 30px 0px 0px;
@@ -46,8 +46,7 @@ const NavbarStyled = styled.div`
 
     .accountSectionButton {
       width: 125px;
-      height: 50px;
-
+      height: 60px;
       text-decoration: none;
 
       display: flex;
@@ -55,7 +54,7 @@ const NavbarStyled = styled.div`
       align-items: center;
 
       margin: 0px 10px 0px 10px;
-      border-radius: 10px;
+      border-radius: 15px;
 
       background: linear-gradient(
         145deg,

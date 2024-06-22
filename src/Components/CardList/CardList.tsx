@@ -12,21 +12,16 @@ const CardList: React.FC<CardListProps> = ({
 }: CardListProps): JSX.Element => {
   return (
     <CardListStyled>
-      {searchResults.length > 0 ? (
-        searchResults.map((result, index) => (
-          <Card
-            key={index}
-            companyName={result.description}
-            displaySymbol={result.displaySymbol}
-            type={result.type}
-            symbol={result.symbol}
-          />
-        ))
-      ) : (
-        <div className="noSearchResultWrapper">
-          <h1>No results...</h1>
-        </div>
-      )}
+      {searchResults.map((result, index) => (
+        <Card
+          key={index}
+          companyName={result.name}
+          displaySymbol={result.ticker}
+          type={result.type}
+          //@ts-ignore
+          ticker={result.ticker}
+        />
+      ))}
     </CardListStyled>
   );
 };

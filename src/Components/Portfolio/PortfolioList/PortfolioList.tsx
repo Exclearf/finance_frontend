@@ -1,9 +1,10 @@
 import React from "react";
 import PortfolioListStyled from "./PortfolioListStyled";
 import CardPortfolio from "../CardPortfolio/CardPortfolio";
+import { AddToPortfolioProps } from "../AddToPortofolio/AddToPortfolio";
 
 interface PortfolioListProps {
-  portfolioValues: string[];
+  portfolioValues: AddToPortfolioProps[];
 }
 
 const PortfolioList: React.FC<PortfolioListProps> = ({
@@ -15,7 +16,7 @@ const PortfolioList: React.FC<PortfolioListProps> = ({
       <div className="portfolioItems">
         {portfolioValues &&
           portfolioValues.map((portfolioValue, index) => (
-            <CardPortfolio portfolioValue={portfolioValue} key={index} />
+            <CardPortfolio portfolioEntry={portfolioValue} key={index} />
           ))}
       </div>
     </PortfolioListStyled>

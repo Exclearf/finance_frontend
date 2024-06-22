@@ -7,6 +7,14 @@ const SearchPageStyled = styled.div`
   background-color: ${(props) => props.theme.background};
   position: relative;
   color: ${(props) => props.theme.textColorMain};
+
+  .errorWrapper {
+    width: 100%;
+    height: 40dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export default SearchPageStyled;

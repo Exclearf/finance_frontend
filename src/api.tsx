@@ -3,14 +3,14 @@ import { CompanyProfile, CompanySearch } from "./company";
 
 interface SearchResponse {
   data: {
-    result: CompanySearch[];
+    results: CompanySearch[];
   };
 }
 
 export const searchCompanies = async (query: string) => {
   try {
     const data = await axios.get<SearchResponse>(
-      `https://finnhub.io/api/v1/search?q=${query}&token=${process.env.REACT_APP_FINANCE_API_KEY}`
+      `https://api.polygon.io/v3/reference/tickers?search=${query}&active=true&limit=100&apiKey=${process.env.REACT_APP_FINANCE_API_KEY}`
     );
 
     return data;

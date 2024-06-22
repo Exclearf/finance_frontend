@@ -2,19 +2,24 @@ import React from "react";
 import DeleteFromPortfolio from "../DeleteFromPortfolio/DeleteFromPortfolio";
 import CardPortfolioStyled from "./CardPortfolioStyled";
 import { Link } from "react-router-dom";
+import { AddToPortfolioProps } from "../AddToPortofolio/AddToPortfolio";
 
 interface CardPortfolioProps {
-  portfolioValue: string;
+  portfolioEntry: AddToPortfolioProps;
 }
 
 const CardPortfolio: React.FC<CardPortfolioProps> = ({
-  portfolioValue,
+  portfolioEntry,
 }: CardPortfolioProps): JSX.Element => {
   return (
-    <Link to={`/company/${portfolioValue}`} style={{ textDecoration: "none" }}>
+    <Link
+      to={`/company/${portfolioEntry.ticker}`}
+      style={{ textDecoration: "none" }}
+      state={{ ticker: portfolioEntry.ticker }}
+    >
       <CardPortfolioStyled>
-        <h4>{portfolioValue}</h4>
-        <DeleteFromPortfolio portfolioValue={portfolioValue} />
+        <h4>{portfolioEntry.displayName}</h4>
+        <DeleteFromPortfolio ticker={portfolioEntry.ticker} />
       </CardPortfolioStyled>
     </Link>
   );

@@ -3,11 +3,11 @@ import { DeleteFromPortfolioContext } from "../../../Contexts/DeleteFromPortfoli
 import DeleteFromPortfolioStyled from "./DeleteFromPortfolioStyled";
 
 interface DeleteFromPortfolioProps {
-  portfolioValue: string;
+  ticker: string;
 }
 
 const DeleteFromPortfolio: React.FC<DeleteFromPortfolioProps> = ({
-  portfolioValue,
+  ticker,
 }: DeleteFromPortfolioProps): JSX.Element => {
   const onPortfolioEntryDelete = useContext(DeleteFromPortfolioContext);
   console.log(onPortfolioEntryDelete);
@@ -15,7 +15,7 @@ const DeleteFromPortfolio: React.FC<DeleteFromPortfolioProps> = ({
     <DeleteFromPortfolioStyled>
       <button
         onClick={(e: SyntheticEvent) =>
-          onPortfolioEntryDelete(e, portfolioValue)
+          onPortfolioEntryDelete(e, ticker)
         }
       />
     </DeleteFromPortfolioStyled>

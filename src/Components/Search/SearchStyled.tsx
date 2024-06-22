@@ -33,7 +33,7 @@ const SearchStyled = styled.div`
     outline: none;
     padding: 0px 25px 0px 25px;
 
-    border-radius: 30px;
+    border-radius: 15px;
     border: 0;
     background: linear-gradient(
       145deg,

@@ -1,5 +1,5 @@
 import { SyntheticEvent, createContext } from "react";
 
 export const AddToPortfolioContext = createContext<
-  (e: SyntheticEvent, value: string) => void
+  (e: SyntheticEvent, ticker: string, displayName: string) => void
 >(() => {});

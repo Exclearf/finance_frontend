@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const CardListStyled = styled.div`
-  width: 100vw;
-  height: 40%;
+  width: 100dvw;
+  height: 40dvh;
   padding: 1% 20px 1% 20px;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -11,11 +11,6 @@ const CardListStyled = styled.div`
 
   display: flex;
   align-items: center;
-
-  .noSearchResultWrapper {
-    width: 100%;
-    text-align: center;
-  }
 
   &::-webkit-scrollbar {
     width: 10px;

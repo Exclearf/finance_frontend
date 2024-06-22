@@ -9,12 +9,19 @@ import CardList from "../../Components/CardList/CardList";
 import { CompanySearch } from "../../company";
 interface SearchPageProps {}
 
+type portfolioEntries = {
+  ticker: string;
+  displayName: string;
+};
+
 const SearchPage: React.FC<SearchPageProps> = (
   props: SearchPageProps
 ): JSX.Element => {
   const [search, setSearch] = useState<string>("");
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
-  const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
+  const [portfolioValues, setPortfolioValues] = useState<portfolioEntries[]>(
+    []
+  );
   const [serverError, setServerError] = useState<string>("");
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,39 +37,50 @@ const SearchPage: React.FC<SearchPageProps> = (
     if (typeof result === "string") {
       setServerError(result);
       //@ts-ignore
-    } else if (Array.isArray(result?.data.result)) {
-      const groupedStocks = Object.groupBy(
+    } else if (Array.isArray(result?.data.results)) {
+      //@ts-ignore
+      setSearchResult(result?.data.results);
+      setServerError(
         //@ts-ignore
-        result?.data.result,
-        //@ts-ignore
-        (item) => item.displaySymbol.split(".")[0]
+        result?.data.results.length ? "" : "We did not find such stock..."
       );
-      if (Object.values(groupedStocks).length > 0) {
-        const parsedResults = Object.values(groupedStocks).map(
-          //@ts-ignore
-          (item: CompanySearch[]) => item[0]
-        );
-        setSearchResult(parsedResults);
-      } else {
-        setServerError("We could not find such a stock...");
-      }
     }
     console.log(searchResult);
   };
 
-  const handleAddToPortfolio = (e: any, value: string) => {
+  const checkIfAlreadyInPortfolio = (portfolioEntry: portfolioEntries) => {
+    for (const entry of portfolioValues) {
+      if (entry.ticker === portfolioEntry.ticker) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const handleAddToPortfolio = (
+    e: any,
+    ticker: string,
+    displayName: string
+  ) => {
     e.preventDefault();
-    if (!portfolioValues.includes(value)) {
-      setPortfolioValues((portfolioValues) => [...portfolioValues, value]);
+    const portfolioEntry: portfolioEntries = {
+      ticker: ticker,
+      displayName: displayName,
+    };
+    if (!checkIfAlreadyInPortfolio(portfolioEntry)) {
+      setPortfolioValues((portfolioValues) => [
+        ...portfolioValues,
+        portfolioEntry,
+      ]);
     }
     // Blur the button
     e.target.blur();
   };
 
-  const handleDeleteFromPortfolio = (e: any, value: string) => {
+  const handleDeleteFromPortfolio = (e: any, ticker: string) => {
     e.preventDefault();
     setPortfolioValues((portfolioValues) =>
-      portfolioValues.filter((item) => item !== value)
+      portfolioValues.filter((item) => item.ticker !== ticker)
     );
 
     // Blur the button
@@ -76,8 +94,11 @@ const SearchPage: React.FC<SearchPageProps> = (
         onSearchClick={handleSearchClick}
       />
       <AddToPortfolioContext.Provider value={handleAddToPortfolio}>
-        <CardList searchResults={searchResult} />
-        {serverError && <h1>Unable to connect to the API</h1>}
+        {serverError ? (
+          <h2 className="errorWrapper">{serverError}</h2>
+        ) : (
+          <CardList searchResults={searchResult} />
+        )}
       </AddToPortfolioContext.Provider>
       <DeleteFromPortfolioContext.Provider value={handleDeleteFromPortfolio}>
         <PortfolioList portfolioValues={portfolioValues} />

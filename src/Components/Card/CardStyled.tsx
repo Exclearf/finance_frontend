@@ -3,7 +3,7 @@ import styled from "styled-components";
 const CardStyled = styled.div`
   width: 200px;
   min-width: 200px;
-  height: 100%;
+  height: 325px;
 
   padding: 10px;
 

@@ -6,17 +6,21 @@ const CardPortfolioStyled = styled.div`
   border-radius: 15px;
 
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 
   background: ${(props) => props.theme.background};
-  box-shadow: 20px 20px 60px ${(props) => props.theme.bottomShadow},
-    -20px -20px 60px ${(props) => props.theme.topShadow};
+  box-shadow: 4px 4px 7px ${(props) => props.theme.bottomShadow},
+    -4px -4px 7px ${(props) => props.theme.topShadow};
 
   margin: 10px;
 
   h4 {
     color: ${(props) => props.theme.textColorMain};
+    overflow: hidden;
+    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    padding: 10px;
   }
 `;
 
