@@ -8,9 +8,13 @@ type DesignPageProps = {};
 const DesignPage = () => {
   return (
     <DesignPageStyled>
-      <h2>The page is where designes/aspects are</h2>
+      <h2>The page where designes/aspects are</h2>
       <Table />
-      <RatioList />
+      <div className="ratioExample">
+        <RatioList />
+        <RatioList />
+        <RatioList />
+      </div>
     </DesignPageStyled>
   );
 };

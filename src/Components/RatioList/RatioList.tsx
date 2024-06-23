@@ -1,5 +1,6 @@
 import React from "react";
 import { testCompany } from "../Table/testData";
+import { RatioListStyled } from "./RatioListStyled";
 
 type Props = {};
 
@@ -8,27 +9,28 @@ type Company = typeof data;
 
 const config = [
   {
-    label: data.name,
+    title: data.name,
     subTitle: data.ticker,
-    render: (company: Company) => company.description,
+    render: (company: Company) => company.cik,
   },
 ];
 
 const RatioList = (props: Props) => {
-  const renderedRows = config.map((row) => {
-    return (
-      <div className="somth">
-        <div className="header">
-          <ul>
-            <li>{row.label}</li>
-            <li>{row.subTitle && row.subTitle}</li>
-          </ul>
-        </div>
-        <div className="content">{row.render(data)}</div>
-      </div>
-    );
-  });
-  return <div>{renderedRows}</div>;
+  return (
+    <>
+      {config.map((row) => {
+        return (
+          <RatioListStyled>
+            <div className="header">
+              <div className="title">{row.title}</div>
+              <div className="subTitle">{row.subTitle && row.subTitle}</div>
+            </div>
+            <div className="content">{row.render(data)}</div>
+          </RatioListStyled>
+        );
+      })}
+    </>
+  );
 };
 
 export default RatioList;
